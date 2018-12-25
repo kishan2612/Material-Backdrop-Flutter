@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage>
     return Scaffold(
       appBar: AppBar(
         title: Text("Backdrop"),
+        elevation: 0,
         leading: IconButton(
           onPressed: () {
             _controller.fling(velocity: _isBackpanelVisible()? -1.0:1.0);
