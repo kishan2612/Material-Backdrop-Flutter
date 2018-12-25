@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_back_drop/twoViews.dart';
 
 void main() => runApp(MyApp());
 
@@ -59,11 +60,7 @@ class _MyHomePageState extends State<MyHomePage>
           ),
         ),
       ),
-      body: Center(
-        child: Container(
-          child: Text("Hello world"),
-        ),
-      ),
+      body: MainActivity(_controller),
     );
   }
 }
