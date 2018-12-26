@@ -11,6 +11,41 @@ class MainActivity extends StatefulWidget {
 
 class _MainActivityState extends State<MainActivity> {
   static const _headerHeight = 40.0;
+
+  static var _superHero = "CaptainAmerica";
+
+  bool _isBackpanelVisible() {
+    final AnimationStatus status = widget._controller.status;
+    return status == AnimationStatus.completed ||
+        status == AnimationStatus.forward;
+  }
+
+  void animate(String hero) {
+    setState(() {
+      _superHero = hero;
+    });
+    widget._controller.fling(velocity: _isBackpanelVisible() ? -1.0 : 1.0);
+  }
+
+  void _backViewOnClick(int position) {
+    switch (position) {
+      case 0:
+        animate("Captain America");
+        break;
+      case 1:
+        animate("Iron Man");
+        break;
+      case 2:
+        animate("Thor");
+        break;
+      case 3:
+        animate("Hulk");
+        break;
+
+      default:
+    }
+  }
+
   Widget activityContainer(BuildContext context, BoxConstraints constraint) {
     final ThemeData _theme = Theme.of(context);
     return Container(
@@ -19,9 +54,35 @@ class _MainActivityState extends State<MainActivity> {
           Container(
             color: _theme.primaryColor,
             child: Center(
-              child: Text(
-                "Back View",
-                style: TextStyle(fontSize: 30),
+              child: Column(
+                children: <Widget>[
+                  MaterialButton(
+                    onPressed: () => _backViewOnClick(0),
+                    child:
+                        Text("Captain America", style: TextStyle(fontSize: 30)),
+                  ),
+                  MaterialButton(
+                    onPressed: () => _backViewOnClick(1),
+                    child: Text(
+                      "Iron Man",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: () => _backViewOnClick(2),
+                    child: Text(
+                      "Thor",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: () => _backViewOnClick(3),
+                    child: Text(
+                      "Hulk",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
@@ -48,8 +109,8 @@ class _MainActivityState extends State<MainActivity> {
                       child: Container(
                         child: Center(
                           child: Text(
-                            "Captain America",
-                            style: TextStyle(fontSize: 25, color: Colors.red),
+                            _superHero,
+                            style: TextStyle(fontSize: 30, color: Colors.red),
                           ),
                         ),
                       ),
